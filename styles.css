@@ -7,7 +7,7 @@ canvas{position:fixed;top:0;left:0;width:100%;height:100%;transition:transform .
   letter-spacing:.22em;text-transform:lowercase;pointer-events:none;
   animation:pulse 2.4s ease-in-out infinite;transition:opacity .7s ease;
 }
-#hint.hidden{opacity:0}
+#hint.hidden{opacity:0;animation:none}
 @keyframes pulse{0%,100%{opacity:.55}50%{opacity:.9}}
 body{animation:fi 1.8s ease both}
 @keyframes fi{from{opacity:0}to{opacity:1}}
