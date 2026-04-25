@@ -3,13 +3,6 @@ import { S } from './state.js';
 let AC = null, ambO = null, ambG = null, ambLfo = null, ambLfoG = null, masterG = null, delay = null, delayG = null;
 export let soundOn = true;
 
-export function syncSoundButton() {
-  const btn = document.getElementById('snd');
-  if (!btn) return;
-  btn.textContent = soundOn ? '♪' : '♩';
-  btn.style.color = soundOn ? 'rgba(255,255,255,.75)' : 'rgba(255,255,255,.35)';
-}
-
 function unlockSoundOnFirstGesture() {
   if (!soundOn) return;
   try {
@@ -40,7 +33,6 @@ function gAC() {
 
 export function toggleSnd() {
   soundOn = !soundOn;
-  syncSoundButton();
   if (!soundOn && ambG) ambG.gain.setTargetAtTime(.0001, gAC().currentTime, .9);
   else if (soundOn && S.phase >= 2) startAmbient();
 }
@@ -108,6 +100,5 @@ export function startAmbient() {
   } catch(e) {}
 }
 
-syncSoundButton();
 window.addEventListener('pointerdown', unlockSoundOnFirstGesture, { once: true, passive: true });
 window.addEventListener('keydown', unlockSoundOnFirstGesture, { once: true });

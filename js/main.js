@@ -2,7 +2,7 @@ import { canvas, toV } from './canvas.js';
 import { S } from './state.js';
 import { FLOWERS, CENTER_IDX, TOTAL_DUR, STEM_OFF, STEM_EACH, BOFF, BDUR } from './config.js';
 import { clamp } from './utils.js';
-import { soundOn, toggleSnd, playBloomChord, playFlowerSound, startAmbient } from './sound.js';
+import { soundOn, playBloomChord, playFlowerSound, startAmbient } from './sound.js';
 import { spawnPollen, spawnFirefly, initParticles, drawParticles } from './particles.js';
 import { drawBg, drawBokeh, drawGodRays, drawPulseRings, drawGround,
          drawBouquet, applyBloomGlow } from './renderer.js';
@@ -50,6 +50,7 @@ function onTap(e) {
   const v = toV(e.clientX, e.clientY);
   if (S.phase === 0) {
     S.phase = 1;
+    document.getElementById('hint').classList.add('hidden');
     if (soundOn) playBloomChord();
     return;
   }
@@ -66,9 +67,6 @@ canvas.addEventListener('touchend', e => {
   const t = e.changedTouches[0]; onTap({clientX: t.clientX, clientY: t.clientY});
 }, {passive: false});
 
-const sndBtn = document.getElementById('snd');
-sndBtn.addEventListener('click',    e => { e.stopPropagation(); toggleSnd(); });
-sndBtn.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); toggleSnd(); }, {passive: false});
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
 initParticles();
