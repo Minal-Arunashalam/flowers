@@ -25,9 +25,6 @@ function tickBloom(now) {
   });
   if (S.blooms.every(b => b >= 1)) {
     S.masterBloom = 1; S.blooms.fill(1); S.stemGrowths.fill(1); S.phase = 2;
-    const h = document.getElementById('hint');
-    h.textContent = 'tap the center to open';
-    h.style.opacity = '.4';
   }
 }
 
@@ -53,7 +50,6 @@ function onTap(e) {
   const v = toV(e.clientX, e.clientY);
   if (S.phase === 0) {
     S.phase = 1;
-    document.getElementById('hint').classList.add('gone');
     if (soundOn) playBloomChord();
     return;
   }
